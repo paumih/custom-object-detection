@@ -126,7 +126,8 @@ We need to add some folders to the environmental variables
 
 A PYTHONPATH variable must be created that points to the \models, \models\research, and \models\research\slim directories. Do this by issuing the following commands (from any directory):  
  **set PYTHONPATH=C:\tensorflow1\models;C:\tensorflow1\models\research;C:\tensorflow1\models\research\slim**  
-  (set PYTHONPATH=C:\Users\paulmi\Desktop\MachineLearning\tf_obj_det_api_workspace\tensorflow1\models;C:\Users\paulmi\Desktop\MachineLearning\tf_obj_det_api_workspace\tensorflow1\models\research;C:\Users\paulmi\Desktop\MachineLearning\tf_obj_det_api_workspace\tensorflow1\models\research\slim)  
+
+(set PYTHONPATH=C:\Users\paulmi\Desktop\MachineLearning\tf_obj_det_api_workspace\tensorflow1\models;C:\Users\paulmi\Desktop\MachineLearning\tf_obj_det_api_workspace\tensorflow1\models\research;C:\Users\paulmi\Desktop\MachineLearning\tf_obj_det_api_workspace\tensorflow1\models\research\slim)  
 
 Add the PYTHONPATH variable to the PATH variables the command:  
 **set PATH=%PATH%;PYTHONPATH**  
