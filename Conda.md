@@ -14,4 +14,5 @@ It means that conda makes possible to:
 
 **meta Python pkg anaconda = about 160 other Python packages for daily use in data science**  
 
+
 Anaconda installer = install python (and its dependencies) + create a new base environment + pip install conda + conda install anaconda data science packages
