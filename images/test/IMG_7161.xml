@@ -1,0 +1,26 @@
+<annotation>
+	<folder>test</folder>
+	<filename>IMG_7161.JPG</filename>
+	<path>C:\Users\paulmi\Desktop\MachineLearning\tf_obj_det_api_workspace\tensorflow1\models\research\object_detection\images\test\IMG_7161.JPG</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>756</width>
+		<height>1008</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>peanuts</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>28</xmin>
+			<ymin>323</ymin>
+			<xmax>732</xmax>
+			<ymax>599</ymax>
+		</bndbox>
+	</object>
+</annotation>

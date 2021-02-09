@@ -1,0 +1,26 @@
+<annotation>
+	<folder>test</folder>
+	<filename>IMG_7213.JPG</filename>
+	<path>C:\Users\paulmi\Desktop\MachineLearning\tf_obj_det_api_workspace\tensorflow1\models\research\object_detection\images\test\IMG_7213.JPG</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>750</width>
+		<height>1125</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>pepsi</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>297</xmin>
+			<ymin>365</ymin>
+			<xmax>491</xmax>
+			<ymax>772</ymax>
+		</bndbox>
+	</object>
+</annotation>
