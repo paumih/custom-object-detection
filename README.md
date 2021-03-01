@@ -95,4 +95,5 @@ Inference can be done multiple ways. The most useful one is the realtime inferen
 
 1. Multiple instances of the same object are individually and not jointly detected
 2. Some false positives may occur for **visually similar objects** as well as for **background** which represents noise that can confuse network. (This issue might be solved by providing in the training dataset unlabeled false negative examples as well as unlabeled background examples in order to learn the model on how to distinguish between a target object and noise)
-3. Some objects are not detected at all if they appear at some relative distance that does not match the training data capturing distance of objects. This issue could be solved by providing in the training set, images at all scales and also by using random zooming image augmentation tehnique 
+3. Some objects are not detected at all if they appear at some relative distance that does not match the training data capturing distance of objects. This issue could be solved by providing in the training set, images at all scales and also by using random zooming image augmentation tehnique.
+4. Multiple detections of the same object can be made, therefore ovearlapping boxes may appear.
