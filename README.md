@@ -83,10 +83,16 @@ in the inference_graph directory, an entire structure of files and directories f
 
 <h3>6. Run the trained model at inference. </h3>  
 
-Inference can be done multiple ways. The most useful one is the realtime inference. In order to perform the inference we relly on some predefined tensorflow objecte detection api utils that can be found in the **object_detection directory** therefore place the inference script inside the object_detection directory
+Inference can be done multiple ways. The most useful one is the realtime inference. In order to perform the inference we relly on some predefined tensorflow object detection api utils that can be found in the **object_detection directory** therefore place the inference script inside the object_detection directory
 
 <h3>6. Results</h3> 
 
 ![All the custom objects are successfully detected. Also, visually similar objects are not confusing for the model](/doc_images/image_1.png)
 
 ![Multiple instances of the same objects are individually detected but some false positives may occur](/doc_images/img3.png)
+
+**Some inference takeaways**:
+
+1. Multiple instances of the same object are individually and not jointly detected
+2. Some false positives may occur for **visually similar objects** as well as for **background** which represents noise that can confuse network. (This issue might be solved by providing in the training dataset unlabeled false negative examples as well as unlabeled background examples in order to learn the model on how to distinguish between a target object and noise)
+3. Some objects are not detected at all if they appear at some relative distance that does not match the training data capturing distance of objects. This issue could be solved by providing in the training set, images at all scales and also by using random zooming image augmentation tehnique 
