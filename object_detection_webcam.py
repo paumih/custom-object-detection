@@ -23,6 +23,7 @@ def run_inference_for_single_image(model, image):
   # The input needs to be a tensor, convert it using `tf.convert_to_tensor`.
   input_tensor = tf.convert_to_tensor(image)
   # The model expects a batch of images, so add an axis with `tf.newaxis`.
+  #expand frame dimensions to have shape: [1, None, None, 3]
   input_tensor = input_tensor[tf.newaxis,...]
 
   # Run inference
@@ -52,42 +53,54 @@ def run_inference_for_single_image(model, image):
     
   return output_dict
 
-def show_inference(model, image_path):
-  # the array based representation of the image will be used later in order to prepare the
-  # result image with boxes and labels on it.
-  image_np = cv2.imread(PATH_TO_IMAGE)
-  # Actual detection.
-  output_dict = run_inference_for_single_image(model, image_np)
-  # Visualization of the results of a detection.
-  vis_util.visualize_boxes_and_labels_on_image_array(
-      image_np,
+
+
+
+CWD_PATH = os.getcwd()
+
+# Path to label map file
+PATH_TO_LABELS = os.path.join(CWD_PATH,'training','label_map.pbtxt')
+category_index = label_map_util.create_category_index_from_labelmap(PATH_TO_LABELS, use_display_name=True)
+
+# Path to the saved model dir
+# Change this path in order to match the desired exported inference graph
+saved_model_dir= 'D:/Machine_Learning/TF2-OBJECT-DET-API/models/research/object_detection/inference_graph_2/saved_model'
+
+#Load the Tensorflow model into memory.
+detection_model = load_model(saved_model_dir)
+
+# Initialize webcam feed
+video = cv2.VideoCapture(0)
+ret = video.set(3,1280)
+ret = video.set(4,720)
+
+while(True):
+
+    ret, frame = video.read()
+    frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+
+    # Perform the actual detection by running the model with the image as input
+    output_dict = run_inference_for_single_image(detection_model, frame_rgb)
+
+    # Draw the results of the detection (aka 'visulaize the results')
+    vis_util.visualize_boxes_and_labels_on_image_array(
+      frame,
       output_dict['detection_boxes'],
       output_dict['detection_classes'],
       output_dict['detection_scores'],
       category_index,
       instance_masks=output_dict.get('detection_masks_reframed', None),
       use_normalized_coordinates=True,
-      line_thickness=8)
+      line_thickness=5,
+      min_score_thresh=0.70)
+    
+    # All the results have been drawn on the frame, so it's time to display it.
+    cv2.imshow('Object detector', frame)
 
-  cv2.imshow('rgb',image_np)
-  cv2.waitKey(0)
+    # Press 'q' to quit
+    if cv2.waitKey(1) == ord('q'):
+        break
 
-
-CWD_PATH = os.getcwd()
-IMAGE_NAME = 'IMG_7077.JPG'
-
-# Path to label map file
-PATH_TO_LABELS = os.path.join(CWD_PATH,'training','label_map.pbtxt')
-category_index = label_map_util.create_category_index_from_labelmap(PATH_TO_LABELS, use_display_name=True)
-
-# Path to image
-PATH_TO_IMAGE = os.path.join(CWD_PATH,'test_images',IMAGE_NAME)
-
-# Path to the saved model dir
-saved_model_dir= 'D:/Machine_Learning/TF2-OBJECT-DET-API/models/research/object_detection/inference_graph_2/saved_model'
-
-# Load the Tensorflow model into memory.
-detection_model = load_model(saved_model_dir)
-
-# Run the detection model on the given image
-show_inference(detection_model, PATH_TO_IMAGE)
+# Clean up
+video.release()
+cv2.destroyAllWindows()

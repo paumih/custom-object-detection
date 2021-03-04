@@ -6,7 +6,7 @@
 
 <h3>1. Setup de object detection API</h3> 
 
-Follow the steps from the [Object Detection API Installation TensorFlow 2](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/tf2.md) documentation  
+Follow the steps from the [Object Detection API Installation TensorFlow 2.*](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/tf2.md) documentation  
 
 Install protobuf, but first download it from [this link](https://github.com/protocolbuffers/protobuf/releases)
 
@@ -45,21 +45,20 @@ python generate_tfrecord.py --csv_input=images/test_labels.csv --image_dir=image
 
 
 
-4. The base config for the model can be found inside the configs/tf2 folder. It needs to be changed to point to the custom data and pretrained weights. Some training parameters also need to be changed. Copy this config file in the training directory  
-
-5.
+4. The base config for the model can be found inside the configs/tf2 folder. It needs to be changed to point to the custom data and pretrained weights. Some training parameters also need to be changed. **Copy this config file in the training directory**  
 
 
 <h3>4.Train the model</h3> 
 From the object detection folder execute:
-python model_main_tf2.py \
-    --pipeline_config_path=training/ssd_efficientdet_d0_512x512_coco17_tpu-8.config \
-    --model_dir=training/training_model_outputs \
-    --checkpoint_every_n=20
-    --alsologtostderr
+python model_main_tf2.py \  
+    --pipeline_config_path=training/  ssd_efficientdet_d0_512x512_coco17_tpu-8.config \  
+    --model_dir=training/training_model_outputs \  
+    --checkpoint_every_n=20 \  
+    --alsologtostderr  
 
-checkpoint_every_n=20, means that every 20 iterations, a checkpoint will be saved
-training/training_model_outputs <- DOES NOT have to be an existing directory
++ checkpoint_every_n=20, means that every 20 iterations, a checkpoint will be saved
++ training/training_model_outputs <- DOES NOT have to be an existing directory
+
 **TensorBoard**
 navigating to the **object_detection directory** and typing
 tensorboard --logdir=training/training_model_outputs/train
@@ -72,7 +71,7 @@ Once the training is finished, to make it easier to use and deploy your model, I
 python exporter_main_v2.py 
     --trained_checkpoint_dir=training/training_model_outputs 
     --pipeline_config_path=training/ssd_efficientdet_d0_512x512_coco17_tpu-8.config 
-    --output_directory inference_graph
+    --output_directory=inference_graph
 
 The command will use the latest saved weights to create a inference graph
 trained_checkpoint_dir=training/training_model_outputs <-has to be the directory where the model checkpoints were saved
@@ -85,7 +84,7 @@ in the inference_graph directory, an entire structure of files and directories f
 
 Inference can be done multiple ways. The most useful one is the realtime inference. In order to perform the inference we relly on some predefined tensorflow object detection api utils that can be found in the **object_detection directory** therefore place the inference script inside the object_detection directory
 
-<h3>6. Results</h3> 
+<h3>7. Results</h3> 
 
 ![All the custom objects are successfully detected. Also, visually similar objects are not confusing for the model](/doc_images/image_1.png)
 
